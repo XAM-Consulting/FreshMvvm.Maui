@@ -16,10 +16,8 @@ namespace FreshMvvmApp
 
 		public CustomImplementedNav ()
 		{	
-            NavigationServiceName = "CustomImplementedNav";
 			SetupTabbedPage ();
 			CreateMenuPage ("Menu");
-			RegisterNavigation ();
 		}
 
 		void SetupTabbedPage()
@@ -28,11 +26,6 @@ namespace FreshMvvmApp
 			_contactsPage = _tabbedNavigationPage.AddTab<ContactListPageModel> ("Contacts", "contacts.png");
 			_quotesPage = _tabbedNavigationPage.AddTab<QuoteListPageModel> ("Quotes", "document.png");
 			this.Detail = _tabbedNavigationPage;
-		}
-
-		protected void RegisterNavigation()
-		{
-            FreshIOC.Container.Register<IFreshNavigationService> (this, NavigationServiceName);
 		}
 
 		protected void CreateMenuPage(string menuPageTitle)
@@ -89,8 +82,6 @@ namespace FreshMvvmApp
         {
             await ((NavigationPage)_tabbedNavigationPage.CurrentPage).PopToRootAsync (animate);
         }
-
-        public string NavigationServiceName { get; private set; }
 
         public void NotifyChildrenPageWasPopped()
         {

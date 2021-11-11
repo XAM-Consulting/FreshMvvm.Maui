@@ -18,8 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FreshIOC\IOC.csproj" />
-    <ProjectReference Include="..\FreshMvvm\FreshMvvm.csproj" />
+    <ProjectReference Include="..\FreshMvvm.Maui\FreshMvvm.Maui.csproj" />
   </ItemGroup>
 
 </Project>

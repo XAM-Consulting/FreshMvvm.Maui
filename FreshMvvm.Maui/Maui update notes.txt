@@ -1,0 +1,8 @@
+﻿
+SwitchOutRootNavigation is removed but you can just switch the navigation service directly on the MainPage how you would normally within a app.
+
+No need to register navigation services 
+FreshIOC.Container.Register<IFreshNavigationService> (this, NavigationServiceName);
+
+FreshIOC has been completely removed.
+

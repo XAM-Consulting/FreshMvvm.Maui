@@ -9,9 +9,7 @@ namespace FreshMvvmApp
     public partial class App : Application
     {
         public App()
-        {
-            FreshIOC.Container.Register<IDatabaseService, DatabaseService>();
-
+        { 
             MainPage = new NavigationPage(new LaunchPage(this));
         }
 
@@ -60,7 +58,7 @@ namespace FreshMvvmApp
             var contactListPage = FreshPageModelResolver.ResolvePageModel<ContactListPageModel>();
             contactListPage.Title = "Contact List";
             //we setup the first navigation container with name MasterPageArea
-            var masterPageArea = new FreshNavigationContainer(contactListPage, "MasterPageArea");
+            var masterPageArea = new FreshNavigationContainer(contactListPage);
             masterPageArea.Title = "Menu";
 
             masterDetailsMultiple.Flyout = masterPageArea; //set the first navigation container to the Master
@@ -69,7 +67,7 @@ namespace FreshMvvmApp
             var quoteListPage = FreshPageModelResolver.ResolvePageModel<QuoteListPageModel>();
             quoteListPage.Title = "Quote List";
             //we setup the second navigation container with name DetailPageArea
-            var detailPageArea = new FreshNavigationContainer(quoteListPage, "DetailPageArea");
+            var detailPageArea = new FreshNavigationContainer(quoteListPage);
 
             masterDetailsMultiple.Detail = detailPageArea; //set the second navigation container to the Detail
 

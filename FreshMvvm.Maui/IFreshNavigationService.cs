@@ -20,8 +20,6 @@ namespace FreshMvvm.Maui
         Task<FreshBasePageModel> SwitchSelectedRootPageModel<T>() where T : FreshBasePageModel;
 
         void NotifyChildrenPageWasPopped();
-
-        string NavigationServiceName { get; }
     }
 }
 

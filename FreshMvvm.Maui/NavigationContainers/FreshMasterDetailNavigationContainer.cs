@@ -12,36 +12,20 @@ namespace FreshMvvm.Maui
         Dictionary<string, Page> _pages = new Dictionary<string, Page> ();
         ContentPage _menuPage;
         ObservableCollection<string> _pageNames = new ObservableCollection<string> ();
-	ListView _listView = new ListView ();
+	    ListView _listView = new ListView ();
 
         public Dictionary<string, Page> Pages { get { return _pages; } }
         protected ObservableCollection<string> PageNames { get { return _pageNames; } }
 
-        public FreshMasterDetailNavigationContainer () : this(Constants.DefaultNavigationServiceName)
-        {			
-        }
-
-        public FreshMasterDetailNavigationContainer (string navigationServiceName)
-        {                       
-            NavigationServiceName = navigationServiceName;   
-            RegisterNavigation ();
-        }
-
         public void Init (string menuTitle, string menuIcon = null)
         {
             CreateMenuPage (menuTitle, menuIcon);
-            RegisterNavigation ();
-        }
-
-        protected virtual void RegisterNavigation ()
-        {
-            FreshIOC.Container.Register<IFreshNavigationService> (this, NavigationServiceName);
         }
 
         public virtual void AddPage<T> (string title, object data = null) where T : FreshBasePageModel
         {
             var page = FreshPageModelResolver.ResolvePageModel<T> (data);
-            page.GetModel ().CurrentNavigationServiceName = NavigationServiceName;
+            page.GetModel ().CurrentNavigationService = this;
             _pagesInner.Add(page);
             var navigationContainer = CreateContainerPage (page);
             _pages.Add (title, navigationContainer);
@@ -53,7 +37,7 @@ namespace FreshMvvm.Maui
         {
             var pageModelType = Type.GetType(modelName);
             var page = FreshPageModelResolver.ResolvePageModel(pageModelType, null);
-            page.GetModel().CurrentNavigationServiceName = NavigationServiceName;
+            page.GetModel().CurrentNavigationService = this;
             _pagesInner.Add(page);
             var navigationContainer = CreateContainerPage(page);
             _pages.Add(title, navigationContainer);
@@ -120,8 +104,6 @@ namespace FreshMvvm.Maui
         {
             return (Detail as NavigationPage).PopToRootAsync (animate);
         }
-
-        public string NavigationServiceName { get; private set; }
 
         public void NotifyChildrenPageWasPopped()
         {

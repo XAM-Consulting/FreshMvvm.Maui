@@ -11,26 +11,10 @@ namespace FreshMvvm.Maui
         List<Page> _tabs = new List<Page>();
         public IEnumerable<Page> TabbedPages { get { return _tabs; } }
 
-        public FreshTabbedNavigationContainer () : this(Constants.DefaultNavigationServiceName)
-        {				
-            
-        }
-
-        public FreshTabbedNavigationContainer(string navigationServiceName)
-        {
-            NavigationServiceName = navigationServiceName;
-            RegisterNavigation ();
-        }
-
-        protected void RegisterNavigation ()
-        {
-            FreshIOC.Container.Register<IFreshNavigationService> (this, NavigationServiceName);
-        }
-
         public virtual Page AddTab<T> (string title, string icon, object data = null) where T : FreshBasePageModel
         {
             var page = FreshPageModelResolver.ResolvePageModel<T> (data);
-            page.GetModel ().CurrentNavigationServiceName = NavigationServiceName;
+            page.GetModel ().CurrentNavigationService = this;
             _tabs.Add (page);
             var navigationContainer = CreateContainerPageSafe (page);
             navigationContainer.Title = title;

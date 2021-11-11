@@ -1,4 +1,5 @@
 ﻿using System;
+using FreshMvvm.Maui;
 using FreshMvvm.Tests.Mocks;
 using NUnit.Framework;
 

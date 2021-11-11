@@ -1,4 +1,5 @@
 ﻿using System;
+using FreshMvvm.Maui.IOC;
 using Microsoft.Maui.Controls;
 
 namespace FreshMvvm.Maui
@@ -14,7 +15,7 @@ namespace FreshMvvm.Maui
 
         public static Page ResolvePageModel<T> (object initData) where T : FreshBasePageModel
         {
-            var pageModel = FreshIOC.Container.Resolve<T> ();
+            var pageModel = DependancyService.Resolve<T> ();
 
             return ResolvePageModel<T> (initData, pageModel);
         }
@@ -27,7 +28,7 @@ namespace FreshMvvm.Maui
 
         public static Page ResolvePageModel (Type type, object data) 
         {
-            var pageModel = FreshIOC.Container.Resolve (type) as FreshBasePageModel;
+            var pageModel = DependancyService.Resolve(type) as FreshBasePageModel;
             return ResolvePageModel (type, data, pageModel);
         }
 
@@ -38,7 +39,7 @@ namespace FreshMvvm.Maui
             if (pageType == null)
                 throw new Exception (name + " not found");
 
-            var page = (Page)FreshIOC.Container.Resolve (pageType);
+            var page = (Page)DependancyService.Resolve(pageType);
 
             BindingPageModel(data, page, pageModel);
 

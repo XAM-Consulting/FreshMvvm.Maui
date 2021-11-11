@@ -18,14 +18,12 @@ namespace FreshMvvm.Tests.Fixtures
         void SetupFirstNavigationAndPage()
 	    {
 	        _navigationMock = Substitute.For<IFreshNavigationService>();
-	        FreshIOC.Container.Register<IFreshNavigationService>(_navigationMock, "firstNav");
-
+	        
 	        _page = FreshPageModelResolver.ResolvePageModel<MockContentPageModel>();
 	        _pageModel = _page.BindingContext as MockContentPageModel;
-	        _pageModel.CurrentNavigationServiceName = "firstNav";
+			_pageModel.SetCurrentNavigationService(_navigationMock);
 
-
-	        _coreMethods = new PageModelCoreMethods(_page, _pageModel);
+			_coreMethods = new PageModelCoreMethods(_page, _pageModel);
         }
 
         [Test]

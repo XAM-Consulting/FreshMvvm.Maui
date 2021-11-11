@@ -6,26 +6,13 @@ namespace FreshMvvm.Maui
 {
     public class FreshNavigationContainer : NavigationPage, IFreshNavigationService
     {
-        public FreshNavigationContainer (Page page) 
-            : this (page, Constants.DefaultNavigationServiceName)
-        {
-        }
-
-        public FreshNavigationContainer (Page page, string navigationPageName) 
-            : base (page)
+        public FreshNavigationContainer (Page page) : base(page)
         {
             var pageModel = page.GetModel ();
             if (pageModel == null)
                 throw new InvalidCastException("BindingContext was not a FreshBasePageModel on this Page");
 
-            pageModel.CurrentNavigationServiceName = navigationPageName;
-            NavigationServiceName = navigationPageName;
-            RegisterNavigation ();
-        }
-
-        protected void RegisterNavigation ()
-        {
-            FreshIOC.Container.Register<IFreshNavigationService> (this, NavigationServiceName);
+            pageModel.CurrentNavigationService = this;
         }
 
         internal Page CreateContainerPageSafe (Page page)
@@ -59,8 +46,6 @@ namespace FreshMvvm.Maui
         {
             return Navigation.PopToRootAsync (animate); 
         }
-
-        public string NavigationServiceName { get; private set; }
 
         public void NotifyChildrenPageWasPopped()
         {

@@ -55,7 +55,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\FreshMvvm\FreshMvvm.csproj" />
+	  <ProjectReference Include="..\FreshMvvm.Maui\FreshMvvm.Maui.csproj" />
 	</ItemGroup>
 
 	<PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">

@@ -227,5 +227,10 @@ namespace FreshMvvm.Tests.Mocks
             //TODO
             throw new NotImplementedException();
         }
+
+        Task<FreshNavigationContainer> IPageModelCoreMethods.PushPageModelWithNewNavigation<T>(object data, bool animate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -56,7 +56,7 @@ namespace FreshMvvmApp
                 return new Command (async () => {
 
                     var page = FreshPageModelResolver.ResolvePageModel<MainMenuPageModel> ();
-                    var basicNavContainer = new FreshNavigationContainer (page, Guid.NewGuid ().ToString ());
+                    var basicNavContainer = new FreshNavigationContainer (page);
                     await CoreMethods.PushNewNavigationServiceModal(basicNavContainer, new FreshBasePageModel[] { page.GetModel() }); 
                 });
             }
@@ -67,7 +67,7 @@ namespace FreshMvvmApp
             get {
                 return new Command (async () => {
 
-                    var tabbedNavigation = new FreshTabbedNavigationContainer (Guid.NewGuid ().ToString ());
+                    var tabbedNavigation = new FreshTabbedNavigationContainer ();
                     tabbedNavigation.AddTab<ContactListPageModel> ("Contacts", "contacts.png", null);
                     tabbedNavigation.AddTab<QuoteListPageModel> ("Quotes", "document.png", null);
                     await CoreMethods.PushNewNavigationServiceModal(tabbedNavigation);
@@ -79,7 +79,7 @@ namespace FreshMvvmApp
             get {
                 return new Command (async () => {
 
-                    var masterDetailNav = new FreshMasterDetailNavigationContainer (Guid.NewGuid ().ToString ());
+                    var masterDetailNav = new FreshMasterDetailNavigationContainer ();
                     masterDetailNav.Init ("Menu", "Menu.png");
                     masterDetailNav.AddPage<ContactListPageModel> ("Contacts", null);
                     masterDetailNav.AddPage<QuoteListPageModel> ("Quotes", null);

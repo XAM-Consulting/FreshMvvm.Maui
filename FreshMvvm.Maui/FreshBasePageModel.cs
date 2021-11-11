@@ -19,7 +19,7 @@ namespace FreshMvvm.Maui
         /// This event is raise when a page is Popped, this might not be raise everytime a page is Popped. 
         /// Note* this might be raised multiple times. 
         /// </summary>
-        public event EventHandler PageWasPopped; 
+        public event EventHandler PageWasPopped;
 
         /// <summary>
         /// This property is used by the FreshBaseContentPage and allows you to set the toolbar items on the page.
@@ -45,7 +45,7 @@ namespace FreshMvvm.Maui
         /// This method is called when a page is Pop'd, it also allows for data to be returned.
         /// </summary>
         /// <param name="returnedData">This data that's returned from </param>
-        public virtual void ReverseInit (object returnedData)
+        public virtual void ReverseInit(object returnedData)
         {
         }
 
@@ -53,19 +53,19 @@ namespace FreshMvvm.Maui
         /// This method is called when the PageModel is loaded, the initData is the data that's sent from pagemodel before
         /// </summary>
         /// <param name="initData">Data that's sent to this PageModel from the pusher</param>
-        public virtual void Init (object initData)
-        {            
+        public virtual void Init(object initData)
+        {
         }
 
-        protected void RaisePropertyChanged ([CallerMemberName] string propertyName = null)
+        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler != null) {
-                handler (this, new PropertyChangedEventArgs (propertyName));
+                handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
-        internal void WireEvents (Page page)
+        internal void WireEvents(Page page)
         {
             page.Appearing += new WeakEventHandler<EventArgs>(ViewIsAppearing).Handler;
             page.Disappearing += new WeakEventHandler<EventArgs>(ViewIsDisappearing).Handler;
@@ -79,19 +79,27 @@ namespace FreshMvvm.Maui
         /// <summary>
         /// Used when a page is shown modal and wants a new Navigation Stack
         /// </summary>
-        public string PreviousNavigationServiceName;
+        public IFreshNavigationService PreviousNavigationService { internal set; get; }
 
         /// <summary>
         /// Used when a page is shown modal and wants a new Navigation Stack
         /// </summary>
-        public string CurrentNavigationServiceName = Constants.DefaultNavigationServiceName;
+        public IFreshNavigationService CurrentNavigationService { internal set; get; }
+
+        /// <summary>
+        /// To be used only when creating your own navigation container
+        /// </summary>
+        public void SetCurrentNavigationService(IFreshNavigationService freshNavigationService)
+        {
+            CurrentNavigationService = freshNavigationService;
+        }
 
         /// <summary>
         /// This means the current PageModel is shown modally and can be pop'd modally
         /// </summary>
         public bool IsModalAndHasPreviousNavigationStack()
         {
-            return !string.IsNullOrWhiteSpace (PreviousNavigationServiceName) && PreviousNavigationServiceName != CurrentNavigationServiceName;
+            return PreviousNavigationService != null;
         }
 
         /// <summary>

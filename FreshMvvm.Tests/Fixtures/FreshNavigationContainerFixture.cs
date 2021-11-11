@@ -9,19 +9,6 @@ namespace FreshMvvm.Tests.Fixtures
 	class FreshNavigationContainerFixture
 	{
 		[Test]
-		public void Test_Register_IFreshNavigationService()
-		{
-            var page = new MockContentPage();
-            page.BindingContext = new MockContentPageModel();
-
-			var navigation = new FreshNavigationContainer(page);
-			var navigationService = FreshIOC.Container.Resolve<IFreshNavigationService>(Constants.DefaultNavigationServiceName);
-
-			Assert.IsNotNull(navigationService);
-			Assert.AreEqual(navigation, navigationService);
-		}
-
-		[Test]
 		public async Task Test_PushPage()
 		{
 			var mainPageViewModel = new MockFreshBasePageModel();
