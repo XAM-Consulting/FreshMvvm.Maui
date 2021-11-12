@@ -11,6 +11,16 @@
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.18362.0</SupportedOSPlatformVersion>
+
+		<Authors>rid00z</Authors>
+		<PackageId>FreshMvvm.Maui</PackageId>
+		<Company>FreshMvvm</Company>
+		<Version>0.0.1</Version>
+		<PackageLicenseUrl>https://github.com/XAM-Consulting/FreshMvvm.Maui/blob/main/LICENSE</PackageLicenseUrl>
+		<Description>FreshMvvm.Maui the famous FreshMvvm framwork, working on MAUI, Simple and easy Mvvm</Description>
+		<RepositoryUrl>https://github.com/XAM-Consulting/FreshMvvm.Maui</RepositoryUrl>
+		<PackageTags>Mvvm, .NET MAUI</PackageTags>
+
 	</PropertyGroup>
 
 	<ItemGroup>
