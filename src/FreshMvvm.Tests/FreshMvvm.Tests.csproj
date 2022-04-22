@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <UseMaui>true</UseMaui>
     <IsPackable>false</IsPackable>
+    <ReleaseVersion>0.4</ReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>

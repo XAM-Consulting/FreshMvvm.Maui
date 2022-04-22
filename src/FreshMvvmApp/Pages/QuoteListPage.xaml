@@ -5,12 +5,14 @@
         <ToolbarItem Text="Add" Command="{Binding AddQuote}" Order="Primary" Priority="0" />
     </ContentPage.ToolbarItems>
 	<local:BasePage.Content>
-		<ListView ItemsSource="{Binding Quotes}" SelectedItem="{Binding SelectedQuote}"  >
-			<ListView.ItemTemplate>
-				<DataTemplate>
-					<TextCell Text="{Binding Total}" Detail="{Binding CustomerName}"></TextCell>
-				</DataTemplate>
-			</ListView.ItemTemplate>
-		</ListView>
+		<StackLayout>
+			<ListView ItemsSource="{Binding Quotes}" SelectedItem="{Binding SelectedQuote}"  >
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<TextCell Text="{Binding Total}" Detail="{Binding CustomerName}"></TextCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</StackLayout>
 	</local:BasePage.Content>
 </local:BasePage>

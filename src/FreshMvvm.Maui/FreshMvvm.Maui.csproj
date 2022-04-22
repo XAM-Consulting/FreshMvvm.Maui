@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net6.0-ios;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
+		<TargetFramework>net6.0</TargetFramework>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
 		<TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</TargetPlatformMinVersion>
 		<UseMaui>true</UseMaui>
@@ -15,12 +15,19 @@
 		<Authors>rid00z</Authors>
 		<PackageId>FreshMvvm.Maui</PackageId>
 		<Company>FreshMvvm</Company>
-		<Version>0.0.1</Version>
+		<Version>0.0.4</Version>
 		<PackageLicenseUrl>https://github.com/XAM-Consulting/FreshMvvm.Maui/blob/main/LICENSE</PackageLicenseUrl>
 		<Description>FreshMvvm.Maui the famous FreshMvvm framwork, working on MAUI, Simple and easy Mvvm</Description>
 		<RepositoryUrl>https://github.com/XAM-Consulting/FreshMvvm.Maui</RepositoryUrl>
 		<PackageTags>Mvvm, .NET MAUI</PackageTags>
+		<PackageReleaseNotes>
+			0.0.4 Built with .NET MAUI RC1
 
+			0.0.3 Remove dependancies that were not required.
+
+			0.0.2 This is the preview release built with preview 14 
+        </PackageReleaseNotes>
+		<ReleaseVersion>0.4</ReleaseVersion>
 	</PropertyGroup>
 
 	<ItemGroup>

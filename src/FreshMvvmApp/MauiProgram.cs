@@ -36,9 +36,11 @@ namespace FreshMvvmApp
             builder.Services.Add(ServiceDescriptor.Transient<QuoteListPageModel, QuoteListPageModel>());
             builder.Services.Add(ServiceDescriptor.Transient<QuotePageModel, QuotePageModel>());
 
-            builder.Services.UseFreshMvvm();
+            MauiApp mauiApp = builder.Build();
 
-            return builder.Build();
+            mauiApp.UseFreshMvvm();
+
+            return mauiApp;
         }
     }
 }

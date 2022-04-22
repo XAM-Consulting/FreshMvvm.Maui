@@ -1,6 +1,7 @@
 ﻿using System;
 using FreshMvvm.Maui.IOC;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Hosting;
 
 namespace FreshMvvm.Maui.Extensions
 {
@@ -10,10 +11,9 @@ namespace FreshMvvm.Maui.Extensions
         /// Registers the services in the service collection with the page resolver
         /// </summary>
         /// <param name="sc"></param>
-        public static void UseFreshMvvm(this IServiceCollection sc)
+        public static void UseFreshMvvm(this MauiApp app)
         {
-            var sp = sc.BuildServiceProvider();
-            DependancyService.RegisterServiceProvider(sp);
+            DependancyService.RegisterServiceProvider(app.Services.GetService<IServiceProvider>());
         }
     }
 }
