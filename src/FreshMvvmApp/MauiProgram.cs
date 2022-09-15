@@ -1,9 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Maui;
-using Microsoft.Maui.Controls.Compatibility;
-using Microsoft.Maui.Controls.Hosting;
-using Microsoft.Maui.Hosting;
-using FreshMvvm.Maui.Extensions;
+﻿using FreshMvvm.Maui.Extensions;
 
 namespace FreshMvvmApp
 {
@@ -12,12 +7,12 @@ namespace FreshMvvmApp
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            
             builder
-                .UseMauiApp<App>()                
+                .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
             builder.Services.Add(ServiceDescriptor.Singleton<IDatabaseService, DatabaseService>());
