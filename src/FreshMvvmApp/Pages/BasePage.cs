@@ -1,15 +1,11 @@
-﻿using System;
-using Microsoft.Maui.Controls;
-using System.ComponentModel;
-
-namespace FreshMvvmApp
+﻿namespace FreshMvvmApp
 {
     public class BasePage : ContentPage
     {
         public BasePage ()
         {            
-            ToolbarItems.Add (new ToolbarItem ("Home","", () => {                
-                Application.Current.MainPage = new NavigationPage (new LaunchPage ((App)Application.Current));
+            ToolbarItems.Add (new ToolbarItem ("Home","", () => {
+                ((App)Application.Current).GoHome();
             }));
         }
 
@@ -17,8 +13,7 @@ namespace FreshMvvmApp
         {
             base.OnAppearing ();
 
-            var basePageModel = this.BindingContext as FreshMvvm.Maui.FreshBasePageModel;
-            if (basePageModel != null) {
+            if (BindingContext is FreshMvvm.Maui.FreshBasePageModel basePageModel) {
                 if (basePageModel.IsModalAndHasPreviousNavigationStack ()) {
                     if (ToolbarItems.Count < 2)
                     {

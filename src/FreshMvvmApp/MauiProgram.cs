@@ -15,21 +15,23 @@ namespace FreshMvvmApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.Add(ServiceDescriptor.Singleton<IDatabaseService, DatabaseService>());
+            builder.Services.AddSingleton<IDatabaseService, DatabaseService>();
 
-            builder.Services.Add(ServiceDescriptor.Transient<ContactListPage, ContactListPage>());
-            builder.Services.Add(ServiceDescriptor.Transient<ContactPage, ContactPage>());
-            builder.Services.Add(ServiceDescriptor.Transient<MainMenuPage, MainMenuPage>());
-            builder.Services.Add(ServiceDescriptor.Transient<ModalPage, ModalPage>());
-            builder.Services.Add(ServiceDescriptor.Transient<QuoteListPage, QuoteListPage>());
-            builder.Services.Add(ServiceDescriptor.Transient<QuotePage, QuotePage>());
+            builder.Services.AddSingleton<LaunchPage>();
 
-            builder.Services.Add(ServiceDescriptor.Transient<ContactListPageModel, ContactListPageModel>());
-            builder.Services.Add(ServiceDescriptor.Transient<ContactPageModel, ContactPageModel>());
-            builder.Services.Add(ServiceDescriptor.Transient<MainMenuPageModel, MainMenuPageModel>());
-            builder.Services.Add(ServiceDescriptor.Transient<ModalPageModel, ModalPageModel>());
-            builder.Services.Add(ServiceDescriptor.Transient<QuoteListPageModel, QuoteListPageModel>());
-            builder.Services.Add(ServiceDescriptor.Transient<QuotePageModel, QuotePageModel>());
+            builder.Services.AddTransient<ContactListPage>();
+            builder.Services.AddTransient<ContactPage>();
+            builder.Services.AddTransient<MainMenuPage>();
+            builder.Services.AddTransient<ModalPage>();
+            builder.Services.AddTransient<QuoteListPage>();
+            builder.Services.AddTransient<QuotePage>();
+
+            builder.Services.AddTransient<ContactListPageModel>();
+            builder.Services.AddTransient<ContactPageModel>();
+            builder.Services.AddTransient<MainMenuPageModel>();
+            builder.Services.AddTransient<ModalPageModel>();
+            builder.Services.AddTransient<QuoteListPageModel>();
+            builder.Services.AddTransient<QuotePageModel>();
 
             MauiApp mauiApp = builder.Build();
 
