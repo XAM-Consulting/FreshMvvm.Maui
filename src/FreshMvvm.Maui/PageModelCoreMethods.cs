@@ -84,7 +84,7 @@ namespace FreshMvvm.Maui
             pageModel.PreviousPageModel = _currentPageModel; //This is the previous page model because it's push to a new one, and this is current
             pageModel.CurrentNavigationService = _currentPageModel.CurrentNavigationService;
 
-            if (pageModel.PreviousNavigationService != null)
+            if (_currentPageModel.PreviousNavigationService != null)
                 pageModel.PreviousNavigationService = _currentPageModel.PreviousNavigationService;
 
             if (page is FreshMasterDetailNavigationContainer) 
