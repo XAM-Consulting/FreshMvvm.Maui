@@ -6,6 +6,9 @@ using System.Linq;
 using Microsoft.Maui.Controls;
 using NSubstitute;
 using FreshMvvm.Maui;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Dispatching;
+using System.Threading.Tasks;
 
 namespace FreshMvvm.Tests
 {
@@ -26,6 +29,17 @@ namespace FreshMvvm.Tests
         [Test]
         public void pagemodel_should_be_link_to_when_created_firsttime()
         {
+            RegisterServices((services) =>
+            {
+                services.AddTransient<MockContentPageModel>();
+                services.AddTransient<MockContentPage>();
+            });
+
+            // Mock the IDispatcherProvider which is needed in the ctor of
+            // a Maui ListView and TabbedPage
+            var dispatcherProvider = Substitute.For<IDispatcherProvider>();
+            DispatcherProvider.SetCurrent(dispatcherProvider);
+
             //master detail navigation
             var masterDetailNavigation = new FreshMasterDetailNavigationContainer();
             masterDetailNavigation.AddPage<MockContentPageModel> ("Page1");
@@ -154,20 +168,20 @@ namespace FreshMvvm.Tests
 
         ///   - when is someone pushes a new MasterDetail or TabbedPages, how do we go back, we need like a PopModalNavigation
         [Test]
-        public void should_allow_popmodalnavigation()
+        public async Task should_allow_popmodalnavigation()
         {
             SetupFirstNavigationAndPage ();
 
             PushSecondNavigationStack ();
 
-            _coreMethodsSecondPage.PushPageModel<MockContentPageModel> ();
+            await _coreMethodsSecondPage.PushPageModel<MockContentPageModel>(null, modal: true);
 
             var pageModelLatest = _secondNavService.CurrentPage.BindingContext as FreshBasePageModel;
 
-            pageModelLatest.CoreMethods.PopModalNavigationService ();
+            await pageModelLatest.CoreMethods.PopModalNavigationService ();
 
             //previousNavigation has pop modal called
-            _navigationMock.Received().PopPage(true);
+            await _navigationMock.Received().PopPage(true);
         }
 
         //TODO: test for this
@@ -182,9 +196,24 @@ namespace FreshMvvm.Tests
         Page _page;
         FreshBasePageModel _pageModel;
 
+        void RegisterServices(Action<IServiceCollection> registerServices)
+        {
+            var services = new ServiceCollection();
+            registerServices(services);
+            var serivceProvider = services.BuildServiceProvider();
+            Maui.IOC.DependancyService.RegisterServiceProvider(serivceProvider);
+        }
+
         void SetupFirstNavigationAndPage()
         {
-            _navigationMock = Substitute.For<IFreshNavigationService> ();                
+            RegisterServices((services) =>
+            {
+                services.AddTransient<MockContentPageModel>();
+                services.AddTransient<MockContentPage>();
+            });
+
+            _navigationMock = Substitute.For<IFreshNavigationService>();
+
             _page = FreshPageModelResolver.ResolvePageModel<MockContentPageModel>();
             _pageModel = _page.BindingContext as MockContentPageModel;   
             _pageModel.SetCurrentNavigationService(_navigationMock);
