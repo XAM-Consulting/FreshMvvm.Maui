@@ -37,16 +37,16 @@ namespace FreshMvvmApp
 
         public override void ReverseInit (object value)
         {
-            var newContact = value as Quote;
-            if (!Quotes.Contains (newContact)) {
-                Quotes.Add (newContact);
+            var newQuote = value as Quote;
+            if (!Quotes.Contains (newQuote)) {
+                Quotes.Add (newQuote);
             }
         }
 
         public Command AddQuote {
             get {
                 return new Command (async () => {
-                    await CoreMethods.PushPageModel<QuotePageModel> ();
+                    await CoreMethods.PushPageModel<QuotePageModel> (vm => vm.Quote = new Quote ());
                 });
             }
         }

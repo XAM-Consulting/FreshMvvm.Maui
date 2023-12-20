@@ -71,7 +71,8 @@ namespace FreshMvvm.Maui
                     Detail = _pages [(string)args.SelectedItem];
                 }
 
-                IsPresented = false;
+                if (!((IFlyoutPageController)this).ShouldShowSplitMode)
+                    IsPresented = false;
             };
 
             _menuPage.Content = _listView;

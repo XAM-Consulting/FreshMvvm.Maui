@@ -23,7 +23,7 @@ namespace FreshMvvmApp
         public void LoadMasterDetail()
         {
             var masterDetailNav = new FreshMasterDetailNavigationContainer();
-            masterDetailNav.Init("Menu", "Menu.png");
+            masterDetailNav.Init("Menu", "menu");
             masterDetailNav.AddPage<ContactListPageModel>("Contacts", null);
             masterDetailNav.AddPage<QuoteListPageModel>("Quotes", null);
             MainPage = masterDetailNav;
@@ -32,16 +32,16 @@ namespace FreshMvvmApp
         public void LoadTabbedNav()
         {
             var tabbedNavigation = new FreshTabbedNavigationContainer();
-            tabbedNavigation.AddTab<ContactListPageModel>("Contacts", "contacts.png", null);
-            tabbedNavigation.AddTab<QuoteListPageModel>("Quotes", "document.png", null);
+            tabbedNavigation.AddTab<ContactListPageModel>("Contacts", "contacts", null);
+            tabbedNavigation.AddTab<QuoteListPageModel>("Quotes", "document", null);
             MainPage = tabbedNavigation;
         }
 
         public void LoadFOTabbedNav()
         {
             var tabbedNavigation = new FreshTabbedFONavigationContainer("CRM");
-            tabbedNavigation.AddTab<ContactListPageModel>("Contacts", "contacts.png", null);
-            tabbedNavigation.AddTab<QuoteListPageModel>("Quotes", "document.png", null);
+            tabbedNavigation.AddTab<ContactListPageModel>("Contacts", "contacts", null);
+            tabbedNavigation.AddTab<QuoteListPageModel>("Quotes", "document", null);
             MainPage = tabbedNavigation;
         }
 
